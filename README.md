@@ -1,8 +1,7 @@
-- [ ] Document usage
 
-# Mock Cartridge used for testing Node Platform
+This is an OpenShift Cartrige.
 
-This is a mock implementation of the cartridge API which is used to test the 
-OpenShift node platform functionality.  The mock cartridges maintains a store
-of what actions have been performed and provides methods to test for those actions.  
+It is intended to be an example of how to build a very simple cartrige.
+
+It provides the Apache Httpd server as a platform upon which to build web apps.
 
