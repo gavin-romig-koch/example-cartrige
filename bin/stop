@@ -1,0 +1,25 @@
+#!/bin/bash
+# The logic to stop your application should be put in this script.
+
+#APPNAME=testrubyserver.rb
+APPNAME=datetime.jar
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+if [ -e $OPENSHIFT_REPO_DIR/server.pid ] ; then
+  kill `cat $OPENSHIFT_REPO_DIR/server.pid`
+  rm $OPENSHIFT_REPO_DIR/server.pid
+  client_result "The server has been killed."
+else
+  client_result "server.pid file could not be found."
+fi
+
+
+if [ -n "$(ps -ef | grep $APPNAME | grep -v grep)" ]
+then
+    client_result "Application was not stopped by server.pid method"
+    kill `ps -ef | grep $APPNAME | grep -v grep | awk '{ print $2 }'` > /dev/null 2>&1
+    if [ -n "$(ps -ef | grep $APPNAME | grep -v grep)" ]
+    then
+        client_result "Application was not stopped grep method"
+    fi     
+fi
